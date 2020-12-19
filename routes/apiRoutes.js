@@ -6,7 +6,7 @@
 const fs = require('fs');
 const router = require('express').Router();
 let notes = [];
-const uuid = require("uuid");
+// const uuid = require("uuid");
 
 // ===============================================================================
 // ROUTING
@@ -24,14 +24,13 @@ fs.readFile("db/db.json", "utf8", (err, data) => {
 
         notes.push(req.body);
         res.json(notes);
-        notes.id = uuid;
+        // notes.id = uuid;
     });
-
 
     router.delete("/api/notes/:id", function (req, res) {
         notes.splice(req.body[req.params.id]);
         res.json(notes);
-        console.log("Deleted note with id " + req.params.id);
+        console.log(req.params.id);
     });
 
 });
