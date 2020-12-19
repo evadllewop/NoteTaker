@@ -17,9 +17,9 @@
 
   ## Usage
   Once the user installs all dependencies and runs the application with `node server.js`, they will then get a message in the console that reads 'App listening on PORT: 3000'. To view the app, open a browser and type in 'http://localhost:3000/' as the url. They are presented with the homescreen. Once they click on the 'Get Started' button, the app will then allow the user to create multiple notes and will be able to save the notes and delete them.
-  See video below:
+  See screenshot below:
 
-  [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/8y2ayBZt26U/0.jpg)](http://www.youtube.com/watch?v=8y2ayBZt26U)
+  ![NoteTaker Screenshot](./images/Screenshot_NoteTaker.png "NoteTaker")
 
   ## Credits
   I like to give credit to Google and my tutor Andrew Knowles https://github.com/jaknowles97.
