@@ -14,23 +14,29 @@ let notes = [];
 
 fs.readFile("db/db.json", "utf8", (err, data) => {
 
-    if (err) throw err;
-
     router.get("/api/notes", function (req, res) {
+
+        if (err) throw err;
         res.json(notes);
+        // res.json(JSON.parse(data));
     });
 
     router.post("/api/notes", function (req, res) {
 
-        notes.push(req.body);
+        if (err) throw err;
+        // const notes = JSON.parse(data);
+        var note = req.body;
+        // note.id = notes.length + 1;
+        notes.push(note);
         res.json(notes);
-        // notes.id = uuid;
     });
 
     router.delete("/api/notes/:id", function (req, res) {
-        notes.splice(req.body[req.params.id]);
+        var note = req.body;
+        notes.splice(note[req.params.id]);
         res.json(notes);
         console.log(req.params.id);
+
     });
 
 });
