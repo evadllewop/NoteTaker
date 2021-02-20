@@ -1,44 +1,29 @@
-// ===============================================================================
-// DEPENDENCIES
-// We need to include the path package to get the correct file path for our html
-// =============================================================================
-
-const fs = require('fs');
 const router = require('express').Router();
-let notes = [];
-// const uuid = require("uuid");
+const store = require('../db/store');
 
-// ===============================================================================
-// ROUTING
-// ===============================================================================
+// GET "/api/notes" responds with all notes from the database
+router.get('/notes', (req, res) => {
+  store
+    .getNotes()
+    .then((notes) => {
+      return res.json(notes);
+    })
+    .catch((err) => res.status(500).json(err));
+});
 
-fs.readFile("db/db.json", "utf8", (err, data) => {
+router.post('/notes', (req, res) => {
+  store
+    .addNote(req.body)
+    .then((note) => res.json(note))
+    .catch((err) => res.status(500).json(err));
+});
 
-    router.get("/api/notes", function (req, res) {
-
-        if (err) throw err;
-        res.json(notes);
-        // res.json(JSON.parse(data));
-    });
-
-    router.post("/api/notes", function (req, res) {
-
-        if (err) throw err;
-        // const notes = JSON.parse(data);
-        var note = req.body;
-        // note.id = notes.length + 1;
-        notes.push(note);
-        res.json(notes);
-    });
-
-    router.delete("/api/notes/:id", function (req, res) {
-        var note = req.body;
-        notes.splice(note[req.params.id]);
-        res.json(notes);
-        console.log(req.params.id);
-
-    });
-
+// DELETE "/api/notes" deletes the note with an id equal to req.params.id
+router.delete('/notes/:id', (req, res) => {
+  store
+    .removeNote(req.params.id)
+    .then(() => res.json({ ok: true }))
+    .catch((err) => res.status(500).json(err));
 });
 
 module.exports = router;
